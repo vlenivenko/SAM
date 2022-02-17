@@ -9,12 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\00 Common\SAM.Core.CQRS\SAM.Core.CQRS.csproj" />
     <ProjectReference Include="..\..\02 Services\SAM.Patient\SAM.Patient.csproj" />
+    <ProjectReference Include="..\..\03 Repository\SAM.Repository\SAM.Repository.csproj" />
   </ItemGroup>
 
 </Project>

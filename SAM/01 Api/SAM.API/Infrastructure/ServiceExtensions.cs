@@ -1,6 +1,10 @@
-﻿using SAM.Core.CQRS.Handlers.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using SAM.Core.CQRS.Handlers.Interfaces;
 using SAM.Core.CQRS.Validation.Interfaces;
+using SAM.Patient.MappingProfiles;
 using SAM.Patient.Services.Queries.GetPatientList;
+using SAM.Repository.Contexts;
+using SAM.Repository.Repositories.Interfaces;
 
 namespace SAM.API.Infrastructure
 {
@@ -21,5 +25,57 @@ namespace SAM.API.Infrastructure
 
             return services;
         }
+
+        /// <summary>
+        /// Initializes mapper
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
+        public static IServiceCollection InitializeMapper(this IServiceCollection services)
+        {
+            services.AddAutoMapper(typeof(ServiceExtensions));
+
+            // add mapping profiles here
+
+            return services;
+        }
+
+        /// <summary>
+        /// Initializes database and its data
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
+        public static IServiceCollection InitializeDatabase(this IServiceCollection services)
+        {
+            services.AddDbContext<Context>(opt => opt.UseInMemoryDatabase("SAM.DB"));
+
+            var context = new Context(services.BuildServiceProvider().GetRequiredService<DbContextOptions<Context>>());
+            services.AddScoped<IRepository>(a => new SAM.Repository.Repositories.Repository(context));
+
+            // seed data just for testing purposes
+            SeedData(services, context);
+
+            return services;
+        }
+
+        #region Data Seeding
+
+        private static IServiceCollection SeedData(IServiceCollection services, Context context)
+        {
+            context.Patients.Add(new SAM.Repository.Models.Patient()
+            {
+                Id = 1,
+                FirstName = "Vlad",
+                LastName = "Lenivenko",
+                DateOfBirth = new DateTime(1989, 08, 10),
+                DiseaseType = "Allergy",
+            });
+
+            context.SaveChanges();
+
+            return services;
+        }
+
+        #endregion
     }
 }

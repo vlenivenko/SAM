@@ -19,6 +19,12 @@ builder.Services.AddSwaggerGen(
 // configure logging
 builder.Services.AddLogging();
 
+// configure mapping
+builder.Services.InitializeMapper();
+
+// configure in memory database
+ServiceExtensions.InitializeDatabase(builder.Services);
+
 // configuring services injection
 ServiceExtensions.AddServices(builder.Services);
 

@@ -1,6 +1,8 @@
-﻿using SAM.Core.CQRS.Handlers;
+﻿using AutoMapper;
+using SAM.Core.CQRS.Handlers;
 using SAM.Core.CQRS.Responses;
 using SAM.Core.CQRS.Validation.Interfaces;
+using SAM.Repository.Repositories.Interfaces;
 
 namespace SAM.Patient.Services.Queries.GetPatientList
 {
@@ -9,34 +11,47 @@ namespace SAM.Patient.Services.Queries.GetPatientList
     /// </summary>
     public class GetPatientListHandler : ValidatedHandler<GetPatientListRequest, GetPatientListResponse>
     {
+        private readonly IRepository _repository;
+        private readonly IMapper _mapper;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="GetPatientListHandler"/> class.
         /// </summary>
         /// <param name="validator"></param>
         public GetPatientListHandler(
+            IRepository repository,
+            IMapper mapper,
             IRequestValidator<GetPatientListRequest, GetPatientListResponse> validator)
             : base(validator)
         {
+            _repository = repository;
+            _mapper = mapper;
         }
 
         /// <inheritdoc/>
         public override async Task<HandlerResponse<GetPatientListResponse>> HandleValidatedRequestAsync(GetPatientListRequest request)
         {
-            var response = new GetPatientListResponse
+            var patientList = await _repository.GetAllAsync<SAM.Repository.Models.Patient>();
+
+            // TODO: map list using automapper
+            // var list = _mapper.Map<List<GetPatientListResponse.Patient>>(patientList);
+
+            var response = new GetPatientListResponse()
             {
-                PatientList = new List<GetPatientListResponse.Patient>
+                // use automapper here
+                PatientList = patientList.Select(p => new GetPatientListResponse.Patient
                 {
-                    new GetPatientListResponse.Patient
-                    {
-                        FirstName = "Vlad",
-                        LastName = "Lenivenko",
-                        DateOfBirth = new DateTime(1989, 08, 10),
-                        DiseaseType = "Allergy",
-                    }
+                    FirstName = p.FirstName,
+                    LastName = p.LastName,
+                    DateOfBirth = p.DateOfBirth,
+                    DiseaseType = p.DiseaseType,
                 }
+                ).ToList(),
             };
 
-            return await Task.FromResult<HandlerResponse<GetPatientListResponse>>(new OkHandlerResponse<GetPatientListResponse>(response));
+            var handlerResponse = new OkHandlerResponse<GetPatientListResponse>(response);
+
+            return await Task.FromResult<HandlerResponse<GetPatientListResponse>>(handlerResponse);
         }
     }
 }

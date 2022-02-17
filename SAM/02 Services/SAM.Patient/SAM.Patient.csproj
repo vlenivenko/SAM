@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\00 Common\SAM.Core.CQRS\SAM.Core.CQRS.csproj" />
+    <ProjectReference Include="..\..\03 Repository\SAM.Repository\SAM.Repository.csproj" />
   </ItemGroup>
 
 </Project>
