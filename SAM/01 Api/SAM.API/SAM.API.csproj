@@ -11,7 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\..\00 Common\SAM.Core.CQRS\SAM.Core.CQRS.csproj" />
+    <ProjectReference Include="..\..\02 Services\SAM.Patient\SAM.Patient.csproj" />
   </ItemGroup>
 
 </Project>
