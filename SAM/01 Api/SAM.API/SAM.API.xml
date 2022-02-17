@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SAM.API</name>
+    </assembly>
+    <members>
+        <member name="T:SAM.API.Controllers.PatientController">
+            <summary>
+            Patient controller
+            </summary>
+        </member>
+        <member name="M:SAM.API.Controllers.PatientController.#ctor(Microsoft.Extensions.Logging.ILogger{SAM.API.Controllers.PatientController},SAM.Core.CQRS.Handlers.Interfaces.IRequestHandler{SAM.Patient.Services.Queries.GetPatientList.GetPatientListRequest,SAM.Patient.Services.Queries.GetPatientList.GetPatientListResponse})">
+            <summary>
+            Initializes a new instance of the <see cref="T:SAM.API.Controllers.PatientController"/> class.
+            </summary>
+        </member>
+        <member name="M:SAM.API.Controllers.PatientController.Get">
+            <summary>
+            Returns patient list
+            </summary>
+            <returns>List of patients data</returns>
+            <response code="200">Request successful</response>
+        </member>
+        <member name="T:SAM.API.Infrastructure.ServiceExtensions">
+            <summary>
+            Extension responsible for dependency injections
+            </summary>
+        </member>
+        <member name="M:SAM.API.Infrastructure.ServiceExtensions.AddServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Initializes services
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SAM.API.Infrastructure.ServiceExtensions.InitializeMapper(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Initializes mapper
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SAM.API.Infrastructure.ServiceExtensions.InitializeDatabase(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Initializes database and its data
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
