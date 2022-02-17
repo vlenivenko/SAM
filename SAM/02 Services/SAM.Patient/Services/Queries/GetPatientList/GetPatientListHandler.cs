@@ -22,7 +22,21 @@ namespace SAM.Patient.Services.Queries.GetPatientList
         /// <inheritdoc/>
         public override async Task<HandlerResponse<GetPatientListResponse>> HandleValidatedRequestAsync(GetPatientListRequest request)
         {
-            return await Task.FromResult<HandlerResponse<GetPatientListResponse>>(null);
+            var response = new GetPatientListResponse
+            {
+                PatientList = new List<GetPatientListResponse.Patient>
+                {
+                    new GetPatientListResponse.Patient
+                    {
+                        FirstName = "Vlad",
+                        LastName = "Lenivenko",
+                        DateOfBirth = new DateTime(1989, 08, 10),
+                        DiseaseType = "Allergy",
+                    }
+                }
+            };
+
+            return await Task.FromResult<HandlerResponse<GetPatientListResponse>>(new OkHandlerResponse<GetPatientListResponse>(response));
         }
     }
 }
