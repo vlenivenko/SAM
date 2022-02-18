@@ -9,7 +9,7 @@
             Patient controller
             </summary>
         </member>
-        <member name="M:SAM.API.Controllers.PatientController.#ctor(Microsoft.Extensions.Logging.ILogger{SAM.API.Controllers.PatientController},SAM.Core.CQRS.Handlers.Interfaces.IRequestHandler{SAM.Patient.Services.Queries.GetPatientList.GetPatientListRequest,SAM.Patient.Services.Queries.GetPatientList.GetPatientListResponse})">
+        <member name="M:SAM.API.Controllers.PatientController.#ctor(Microsoft.Extensions.Logging.ILogger{SAM.API.Controllers.PatientController},SAM.Core.CQRS.Handlers.Interfaces.IRequestHandler{SAM.Patient.Services.Queries.GetPatientList.GetPatientListRequest,SAM.Patient.Services.Queries.GetPatientList.GetPatientListResponse},SAM.Core.CQRS.Handlers.Interfaces.IRequestHandler{SAM.Patient.Services.Commands.CreatePatient.CreatePatientRequest,SAM.Patient.Services.Commands.CreatePatient.CreatePatientResponse})">
             <summary>
             Initializes a new instance of the <see cref="T:SAM.API.Controllers.PatientController"/> class.
             </summary>
@@ -20,6 +20,14 @@
             </summary>
             <returns>List of patients data</returns>
             <response code="200">Request successful</response>
+        </member>
+        <member name="M:SAM.API.Controllers.PatientController.Post(SAM.Patient.Services.Commands.CreatePatient.CreatePatientRequest)">
+            <summary>
+            Create patient
+            </summary>
+            <returns>Id of created patient</returns>
+            <response code="201">Request successful</response>
+            <response code="400">Bad request\Validation failed</response>
         </member>
         <member name="T:SAM.API.Infrastructure.ServiceExtensions">
             <summary>

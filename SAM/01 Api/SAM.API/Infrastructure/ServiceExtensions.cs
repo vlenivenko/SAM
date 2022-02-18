@@ -2,6 +2,7 @@
 using SAM.Core.CQRS.Handlers.Interfaces;
 using SAM.Core.CQRS.Validation.Interfaces;
 using SAM.Patient.MappingProfiles;
+using SAM.Patient.Services.Commands.CreatePatient;
 using SAM.Patient.Services.Queries.GetPatientList;
 using SAM.Repository.Contexts;
 using SAM.Repository.Repositories.Interfaces;
@@ -23,6 +24,9 @@ namespace SAM.API.Infrastructure
             services.AddScoped<IRequestHandler<GetPatientListRequest, GetPatientListResponse>, GetPatientListHandler>();
             services.AddScoped<IRequestValidator<GetPatientListRequest, GetPatientListResponse>, GetPatientListValidator>();
 
+            services.AddScoped<IRequestHandler<CreatePatientRequest, CreatePatientResponse>, CreatePatientHandler>();
+            services.AddScoped<IRequestValidator<CreatePatientRequest, CreatePatientResponse>, CreatePatientValidator>();
+
             return services;
         }
 
@@ -33,9 +37,8 @@ namespace SAM.API.Infrastructure
         /// <returns></returns>
         public static IServiceCollection InitializeMapper(this IServiceCollection services)
         {
-            services.AddAutoMapper(typeof(ServiceExtensions));
-
             // add mapping profiles here
+            services.AddAutoMapper(typeof(PatientMappingProfile).Assembly);
 
             return services;
         }
@@ -67,7 +70,7 @@ namespace SAM.API.Infrastructure
                 Id = 1,
                 FirstName = "Vlad",
                 LastName = "Lenivenko",
-                DateOfBirth = new DateTime(1989, 08, 10),
+                DateOfBirth = new DateOnly(1989, 08, 10),
                 DiseaseType = "Allergy",
             });
 

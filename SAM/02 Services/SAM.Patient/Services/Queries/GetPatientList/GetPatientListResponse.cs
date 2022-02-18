@@ -16,6 +16,11 @@
         public class Patient
         {
             /// <summary>
+            /// Patient Id
+            /// </summary>
+            public int Id { get; set; }
+
+            /// <summary>
             /// First name
             /// </summary>
             public string FirstName { get; set; }
@@ -28,7 +33,7 @@
             /// <summary>
             /// DOB
             /// </summary>
-            public DateTime DateOfBirth { get; set; }
+            public DateOnly DateOfBirth { get; set; }
 
             /// <summary>
             /// Type of disease

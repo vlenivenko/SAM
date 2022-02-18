@@ -1,12 +1,10 @@
-﻿namespace SAM.Repository.Models
+﻿namespace SAM.Patient.Services.Commands.CreatePatient
 {
-    public class Patient
+    /// <summary>
+    /// Create patient request
+    /// </summary>
+    public class CreatePatientRequest
     {
-        /// <summary>
-        /// Patient Id
-        /// </summary>
-        public int Id { get; set; }
-
         /// <summary>
         /// First name
         /// </summary>
