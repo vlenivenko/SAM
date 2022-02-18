@@ -29,6 +29,24 @@
             <response code="201">Request successful</response>
             <response code="400">Bad request\Validation failed</response>
         </member>
+        <member name="T:SAM.API.Controllers.SearchController">
+            <summary>
+            Search controller
+            </summary>
+        </member>
+        <member name="M:SAM.API.Controllers.SearchController.#ctor(Microsoft.Extensions.Logging.ILogger{SAM.API.Controllers.SearchController},SAM.Core.CQRS.Handlers.Interfaces.IRequestHandler{SAM.Search.Services.Commands.CreateSearch.CreateSearchRequest,SAM.Search.Services.Commands.CreateSearch.CreateSearchResponse})">
+            <summary>
+            Initializes a new instance of the <see cref="T:SAM.API.Controllers.SearchController"/> class.
+            </summary>
+        </member>
+        <member name="M:SAM.API.Controllers.SearchController.Post(SAM.Search.Services.Commands.CreateSearch.CreateSearchRequest)">
+            <summary>
+            Create search
+            </summary>
+            <returns></returns>
+            <response code="201">Request successful</response>
+            <response code="400">Bad request\Validation failed</response>
+        </member>
         <member name="T:SAM.API.Infrastructure.ServiceExtensions">
             <summary>
             Extension responsible for dependency injections

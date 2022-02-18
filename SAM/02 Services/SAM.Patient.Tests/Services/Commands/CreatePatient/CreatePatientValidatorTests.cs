@@ -4,7 +4,7 @@ using FluentAssertions;
 using NUnit.Framework;
 using SAM.Patient.Services.Commands.CreatePatient;
 
-namespace SAM.Patient.Tests.Services.CreatePatient
+namespace SAM.Patient.Tests.Services.CreatePatient.Commands
 {
     [TestFixture]
     public class CreatePatientValidatorTests

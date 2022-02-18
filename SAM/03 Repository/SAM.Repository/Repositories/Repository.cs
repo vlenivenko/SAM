@@ -19,17 +19,24 @@ namespace SAM.Repository.Repositories
         }
 
         /// <inheritdoc/>
+        public async Task<ICollection<T>> GetAllAsync<T>() where T : class
+        {
+            return await _context.Set<T>().ToListAsync();
+        }
+
+        /// <inheritdoc/>
+        public async Task<T> GetByIdAsync<T>(int id) where T : class
+        {
+            return await _context.Set<T>().FindAsync(id);
+        }
+
+        /// <inheritdoc/>
         public async Task AddAsync<T>(T entity) where T : class
         {
             await _context.Set<T>().AddAsync(entity);
         }
 
         /// <inheritdoc/>
-        public async Task<ICollection<T>> GetAllAsync<T>() where T : class
-        {
-            return await _context.Set<T>().ToListAsync();
-        }
-
         public async Task<int> CommitAsync()
         {
             return await _context.SaveChangesAsync();
