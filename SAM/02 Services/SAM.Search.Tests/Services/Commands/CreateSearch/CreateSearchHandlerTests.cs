@@ -91,10 +91,6 @@ namespace SAM.Search.Tests.Services.Commands.CreateSearch
                 MatchEngineId = Enums.MatchEngineType.MatchEngine1,
             };
 
-            _repository.Setup(x =>
-                    x.GetByIdAsync<SAM.Repository.Models.Patient>(request.PatientId))
-                .ReturnsAsync((SAM.Repository.Models.Patient)null);
-
             // act
             // assert
             await _handler.Invoking(x => x.HandleValidatedRequestAsync(request))
