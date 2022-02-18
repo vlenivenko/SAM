@@ -41,6 +41,7 @@ namespace SAM.Patient.Services.Queries.GetPatientList
                 // use automapper here
                 PatientList = patientList.Select(p => new GetPatientListResponse.Patient
                 {
+                    Id = p.Id,
                     FirstName = p.FirstName,
                     LastName = p.LastName,
                     DateOfBirth = p.DateOfBirth,
@@ -49,9 +50,7 @@ namespace SAM.Patient.Services.Queries.GetPatientList
                 ).ToList(),
             };
 
-            var handlerResponse = new OkHandlerResponse<GetPatientListResponse>(response);
-
-            return await Task.FromResult<HandlerResponse<GetPatientListResponse>>(handlerResponse);
+            return new OkHandlerResponse<GetPatientListResponse>(response);
         }
     }
 }
