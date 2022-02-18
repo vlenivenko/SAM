@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Net;
+using AutoMapper;
 using SAM.Core.CQRS.Handlers;
 using SAM.Core.CQRS.Responses;
 using SAM.Core.CQRS.Validation.Interfaces;
@@ -31,14 +32,7 @@ namespace SAM.Patient.Services.Commands.CreatePatient
         /// <inheritdoc/>
         public override async Task<HandlerResponse<CreatePatientResponse>> HandleValidatedRequestAsync(CreatePatientRequest request)
         {
-            // TODO: map request using automapper
-            var patient = new SAM.Repository.Models.Patient
-            {
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                DateOfBirth = request.DateOfBirth,
-                DiseaseType = request.DiseaseType,
-            };
+            var patient = _mapper.Map<SAM.Repository.Models.Patient>(request);
 
             await _repository.AddAsync(patient);
 
@@ -49,7 +43,7 @@ namespace SAM.Patient.Services.Commands.CreatePatient
                 Id = patient.Id,
             };
 
-            return new OkHandlerResponse<CreatePatientResponse>(response);
+            return new OkHandlerResponse<CreatePatientResponse>(HttpStatusCode.Created, response);
         }
     }
 }

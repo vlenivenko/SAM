@@ -9,10 +9,10 @@ namespace SAM.Patient.Services.Commands.CreatePatient
     /// </summary>
     public class CreatePatientValidator : BaseValidator<CreatePatientRequest, CreatePatientResponse>
     {
-        public const int FirstNameMaxLength = 5;
-
         public const string InvalidFirstNameErrorMessage = "First name should not be empty, should not be less than 5 symbols and should contain letters only";
         public const string InvalidDateOfBirthErrorMessage = "Date of birth is required";
+
+        private const int FirstNameMaxLength = 5;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CreatePatientValidator"/> class.

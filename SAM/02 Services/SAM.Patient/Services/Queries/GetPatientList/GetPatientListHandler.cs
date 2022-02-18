@@ -33,21 +33,11 @@ namespace SAM.Patient.Services.Queries.GetPatientList
         {
             var patientList = await _repository.GetAllAsync<SAM.Repository.Models.Patient>();
 
-            // TODO: map list using automapper
-            // var list = _mapper.Map<List<GetPatientListResponse.Patient>>(patientList);
+            var list = _mapper.Map<List<GetPatientListResponse.Patient>>(patientList);
 
             var response = new GetPatientListResponse()
             {
-                // use automapper here
-                PatientList = patientList.Select(p => new GetPatientListResponse.Patient
-                {
-                    Id = p.Id,
-                    FirstName = p.FirstName,
-                    LastName = p.LastName,
-                    DateOfBirth = p.DateOfBirth,
-                    DiseaseType = p.DiseaseType,
-                }
-                ).ToList(),
+                PatientList = _mapper.Map<List<GetPatientListResponse.Patient>>(patientList),
             };
 
             return new OkHandlerResponse<GetPatientListResponse>(response);

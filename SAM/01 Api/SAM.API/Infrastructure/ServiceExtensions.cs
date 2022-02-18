@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SAM.Core.CQRS.Handlers.Interfaces;
 using SAM.Core.CQRS.Validation.Interfaces;
+using SAM.Patient.MappingProfiles;
 using SAM.Patient.Services.Commands.CreatePatient;
 using SAM.Patient.Services.Queries.GetPatientList;
 using SAM.Repository.Contexts;
@@ -36,9 +37,8 @@ namespace SAM.API.Infrastructure
         /// <returns></returns>
         public static IServiceCollection InitializeMapper(this IServiceCollection services)
         {
-            services.AddAutoMapper(typeof(ServiceExtensions));
-
             // add mapping profiles here
+            services.AddAutoMapper(typeof(PatientMappingProfile).Assembly);
 
             return services;
         }
