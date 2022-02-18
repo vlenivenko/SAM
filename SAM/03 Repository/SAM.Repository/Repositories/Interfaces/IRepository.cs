@@ -13,6 +13,13 @@
         Task<ICollection<T>> GetAllAsync<T>() where T : class;
 
         /// <summary>
+        /// Returns entity by id
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        Task<T> GetByIdAsync<T>(int id) where T : class;
+
+        /// <summary>
         /// Add entity
         /// </summary>
         /// <typeparam name="T"></typeparam>

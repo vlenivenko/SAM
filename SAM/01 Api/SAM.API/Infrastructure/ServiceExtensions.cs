@@ -6,6 +6,7 @@ using SAM.Patient.Services.Commands.CreatePatient;
 using SAM.Patient.Services.Queries.GetPatientList;
 using SAM.Repository.Contexts;
 using SAM.Repository.Repositories.Interfaces;
+using SAM.Search.Services.Commands.CreateSearch;
 
 namespace SAM.API.Infrastructure
 {
@@ -26,6 +27,9 @@ namespace SAM.API.Infrastructure
 
             services.AddScoped<IRequestHandler<CreatePatientRequest, CreatePatientResponse>, CreatePatientHandler>();
             services.AddScoped<IRequestValidator<CreatePatientRequest, CreatePatientResponse>, CreatePatientValidator>();
+
+            services.AddScoped<IRequestHandler<CreateSearchRequest, CreateSearchResponse>, CreateSearchHandler>();
+            services.AddScoped<IRequestValidator<CreateSearchRequest, CreateSearchResponse>, CreateSearchValidator>();
 
             return services;
         }

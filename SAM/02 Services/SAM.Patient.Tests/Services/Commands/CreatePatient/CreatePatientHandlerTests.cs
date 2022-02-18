@@ -9,8 +9,9 @@ using SAM.Core.CQRS.Validation.Interfaces;
 using SAM.Patient.Services.Commands.CreatePatient;
 using SAM.Repository.Repositories.Interfaces;
 
-namespace SAM.Patient.Tests.Services.CreatePatient
+namespace SAM.Patient.Tests.Services.CreatePatient.Commands
 {
+    [TestFixture]
     public class CreatePatientHandlerTests
     {
         private MockRepository _mockRepository;
@@ -37,7 +38,7 @@ namespace SAM.Patient.Tests.Services.CreatePatient
         }
 
         [Test]
-        public async Task HandleValidatedRequestAsync_Valid()
+        public async Task HandleValidatedRequestAsync_ValidRequest_SuccessResponse()
         {
             // arrange
             var request = new CreatePatientRequest
