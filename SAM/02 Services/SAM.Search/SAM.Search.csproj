@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\00 Common\SAM.Core.CQRS\SAM.Core.CQRS.csproj" />
+    <ProjectReference Include="..\..\00 Common\SAM.Core.Utilities\SAM.Core.Utilities.csproj" />
     <ProjectReference Include="..\..\03 Repository\SAM.Repository\SAM.Repository.csproj" />
   </ItemGroup>
 

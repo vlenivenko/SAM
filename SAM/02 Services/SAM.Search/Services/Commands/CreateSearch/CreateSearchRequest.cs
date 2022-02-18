@@ -1,4 +1,6 @@
-﻿namespace SAM.Search.Services.Commands.CreateSearch
+﻿using SAM.Search.Enums;
+
+namespace SAM.Search.Services.Commands.CreateSearch
 {
     /// <summary>
     /// Create search request
@@ -13,6 +15,6 @@
         /// <summary>
         /// Search engine id
         /// </summary>
-        public byte MatchEngineId { get; set; }
+        public MatchEngineType MatchEngineId { get; set; }
     }
 }

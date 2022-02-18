@@ -4,6 +4,7 @@ using SAM.Core.CQRS.Handlers;
 using SAM.Core.CQRS.Responses;
 using SAM.Core.CQRS.Validation.Interfaces;
 using SAM.Repository.Repositories.Interfaces;
+using SAM.Search.SearchEngines;
 
 namespace SAM.Search.Services.Commands.CreateSearch
 {
@@ -13,7 +14,7 @@ namespace SAM.Search.Services.Commands.CreateSearch
     public class CreateSearchHandler : ValidatedHandler<CreateSearchRequest, CreateSearchResponse>
     {
         private readonly IRepository _repository;
-        private readonly IMapper _mapper;
+        private readonly ISearchEngineFactory _searchEngineFactory;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateSearchHandler"/> class.
@@ -21,12 +22,12 @@ namespace SAM.Search.Services.Commands.CreateSearch
         /// <param name="validator"></param>
         public CreateSearchHandler(
             IRepository repository,
-            IMapper mapper,
+            ISearchEngineFactory searchEngineFactory,
             IRequestValidator<CreateSearchRequest, CreateSearchResponse> validator)
             : base(validator)
         {
             _repository = repository;
-            _mapper = mapper;
+            _searchEngineFactory = searchEngineFactory;
         }
 
         /// <inheritdoc/>
@@ -38,7 +39,8 @@ namespace SAM.Search.Services.Commands.CreateSearch
                 throw new ArgumentException(nameof(request.PatientId));
             }
 
-            // TODO: intergration with specific search engine will be implemented here
+            var searchEngineClient = _searchEngineFactory.GetClient(request.MatchEngineId);
+            await searchEngineClient.SearchAsync(patient);
 
             return new OkHandlerResponse<CreateSearchResponse>(HttpStatusCode.Created, new CreateSearchResponse());
         }
