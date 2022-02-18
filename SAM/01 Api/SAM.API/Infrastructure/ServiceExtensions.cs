@@ -6,6 +6,8 @@ using SAM.Patient.Services.Commands.CreatePatient;
 using SAM.Patient.Services.Queries.GetPatientList;
 using SAM.Repository.Contexts;
 using SAM.Repository.Repositories.Interfaces;
+using SAM.Search.MappingProfiles;
+using SAM.Search.SearchEngines;
 using SAM.Search.Services.Commands.CreateSearch;
 
 namespace SAM.API.Infrastructure
@@ -30,6 +32,7 @@ namespace SAM.API.Infrastructure
 
             services.AddScoped<IRequestHandler<CreateSearchRequest, CreateSearchResponse>, CreateSearchHandler>();
             services.AddScoped<IRequestValidator<CreateSearchRequest, CreateSearchResponse>, CreateSearchValidator>();
+            services.AddScoped<ISearchEngineFactory, SearchEngineFactory>();
 
             return services;
         }
@@ -43,6 +46,7 @@ namespace SAM.API.Infrastructure
         {
             // add mapping profiles here
             services.AddAutoMapper(typeof(PatientMappingProfile).Assembly);
+            services.AddAutoMapper(typeof(SearchMappingProfile).Assembly);
 
             return services;
         }

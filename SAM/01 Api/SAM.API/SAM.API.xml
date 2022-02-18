@@ -73,5 +73,27 @@
             <param name="services"></param>
             <returns></returns>
         </member>
+        <member name="T:SAM.API.JsonConverter.DateOnlyConverter">
+            <summary>
+            Converter for DateOnly type
+            </summary>
+        </member>
+        <member name="M:SAM.API.JsonConverter.DateOnlyConverter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:SAM.API.JsonConverter.DateOnlyConverter"/> class.
+            </summary>
+        </member>
+        <member name="M:SAM.API.JsonConverter.DateOnlyConverter.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SAM.API.JsonConverter.DateOnlyConverter"/> class.
+            </summary>
+            <param name="serializationFormat"></param>
+        </member>
+        <member name="M:SAM.API.JsonConverter.DateOnlyConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SAM.API.JsonConverter.DateOnlyConverter.Write(System.Text.Json.Utf8JsonWriter,System.DateOnly,System.Text.Json.JsonSerializerOptions)">
+            <inheritdoc/>
+        </member>
     </members>
 </doc>

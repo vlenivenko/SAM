@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
-using AutoMapper;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using SAM.Core.CQRS.Validation.Interfaces;
 using SAM.Repository.Repositories.Interfaces;
+using SAM.Search.SearchEngines;
+using SAM.Search.SearchEngines.Clients;
 using SAM.Search.Services.Commands.CreateSearch;
 
 namespace SAM.Search.Tests.Services.Commands.CreateSearch
@@ -17,7 +18,7 @@ namespace SAM.Search.Tests.Services.Commands.CreateSearch
         private MockRepository _mockRepository;
 
         private Mock<IRepository> _repository;
-        private Mock<IMapper> _mapper;
+        private Mock<ISearchEngineFactory> _searchEngineFactory;
         private Mock<IRequestValidator<CreateSearchRequest, CreateSearchResponse>> _validator;
 
         private CreateSearchHandler _handler;
@@ -28,12 +29,12 @@ namespace SAM.Search.Tests.Services.Commands.CreateSearch
             _mockRepository = new MockRepository(MockBehavior.Default);
 
             _repository = _mockRepository.Create<IRepository>();
-            _mapper = _mockRepository.Create<IMapper>();
+            _searchEngineFactory = _mockRepository.Create<ISearchEngineFactory>();
             _validator = _mockRepository.Create<IRequestValidator<CreateSearchRequest, CreateSearchResponse>>();
 
             _handler = new CreateSearchHandler(
                 _repository.Object,
-                _mapper.Object,
+                _searchEngineFactory.Object,
                 _validator.Object);
         }
 
@@ -44,7 +45,7 @@ namespace SAM.Search.Tests.Services.Commands.CreateSearch
             var request = new CreateSearchRequest
             {
                 PatientId = 1,
-                MatchEngineId = 1,
+                MatchEngineId = Enums.MatchEngineType.MatchEngine1,
             };
 
             var patient = new SAM.Repository.Models.Patient
@@ -59,6 +60,11 @@ namespace SAM.Search.Tests.Services.Commands.CreateSearch
             _repository.Setup(x =>
                     x.GetByIdAsync<SAM.Repository.Models.Patient>(request.PatientId))
                 .ReturnsAsync(patient);
+
+            var searchEngineClient = _mockRepository.Create<ISearchEngineClient>();
+            _searchEngineFactory.Setup(x =>
+                    x.GetClient(request.MatchEngineId))
+                .Returns(searchEngineClient.Object);
 
             // act
             var response = await _handler.HandleValidatedRequestAsync(request);
@@ -82,7 +88,7 @@ namespace SAM.Search.Tests.Services.Commands.CreateSearch
             var request = new CreateSearchRequest
             {
                 PatientId = 1,
-                MatchEngineId = 1,
+                MatchEngineId = Enums.MatchEngineType.MatchEngine1,
             };
 
             _repository.Setup(x =>
