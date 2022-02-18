@@ -66,10 +66,6 @@ namespace SAM.Search.Tests.Services.Commands.CreateSearch
                 PatientId = 1,
             };
 
-            _repository.Setup(x =>
-                    x.GetByIdAsync<SAM.Repository.Models.Patient>(request.PatientId))
-                .ReturnsAsync((SAM.Repository.Models.Patient)null);
-
             // act
             var result = await _validator.ValidateAsync(request);
 
