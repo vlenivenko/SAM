@@ -11,9 +11,9 @@ The SAM project
 
   _02 Services_ - Business logic area. Contains project with specific logic related to patient and search as well as test projects
   1. _SAM.Patient_ - Functionality related to patient area
-  2. _SAM.Patient.Tests_ - Appropriate patient tests
-  3. _SAM.Search_ - Functionality related to patient area
-  4. _SAM.Search.Tests_ - Appropriate patient tests
+  2. _SAM.Patient.Tests_ - Appropriate patient area tests
+  3. _SAM.Search_ - Functionality related to search area
+  4. _SAM.Search.Tests_ - Appropriate search area tests
 
   03 Repository - Data access layer area
   1. _SAM.Repository_ - Functionality that interacts with datasource (EF In-memory)
